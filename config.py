@@ -1,22 +1,23 @@
 import os
 from yacs.config import CfgNode as CN
 
-DATA_DIR = '/data/project'
-MAIN_DIR = '/project'
+DATA_DIR = 'Data'
+MAIN_DIR = 'DLTrainer'
 
 _C = CN()
-_C.EXP_NM = 'default'
+_C.EXP_NM = 'test'
 _C.EXP_DIR = 'experiments'
 
 # training params
 _C.TRAIN = CN()
-_C.TRAIN.NUM_EPOCHS = 10
+_C.TRAIN.NUM_EPOCHS = 5
 #_C.TRAIN_STEPS = 10000
 _C.TRAIN.GRAD_ACCUM_STEPS = 1
-_C.TRAIN.EVAL_STEPS = 1000
+_C.TRAIN.EVAL_STEPS = 50
 _C.TRAIN.CP_DIR = 'checkpoints'
-_C.TRAIN.SAVE_CP = False
-_C.TRAIN.EVAL_ONLY = False
+_C.TRAIN.DEVICE = 'gpu'
+_C.TRAIN.SAVE_CP = True
+_C.TRAIN.EVAL_ONLY = True
 
 # model params
 _C.TRAIN.MODEL = CN()
@@ -43,15 +44,15 @@ _C.DATASETS = CN()
 
 # train data
 _C.DATASETS.TRAIN = CN()
-_C.DATASETS.TRAIN.CSV_PATH = os.path.join(DATA_DIR, 'train_data.csv')
+_C.DATASETS.TRAIN.CSV_PATH = os.path.join(DATA_DIR, 'train_sample.csv')
 
 # val data
 _C.DATASETS.VAL = CN()
-_C.DATASETS.VAL.CSV_PATH = os.path.join(DATA_DIR, 'val_data.csv')
+_C.DATASETS.VAL.CSV_PATH = os.path.join(DATA_DIR, 'valid_sample.csv')
 
 # test data
 _C.DATASETS.TEST = CN()
-_C.DATASETS.TEST.CSV_PATH = None
+_C.DATASETS.TEST.CSV_PATH = os.path.join(DATA_DIR, 'valid_sample.csv')
 
 # tensorboard writer
 _C.WRITER = CN()

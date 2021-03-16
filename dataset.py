@@ -1,6 +1,7 @@
 # Libraries
 from transformers import AutoTokenizer
 import torch
+from torch.utils.data import DataLoader
 import pandas as pd
 
 # Dataset Class
@@ -29,7 +30,7 @@ def get_dataset(data_path, model_path):
     else:
         df = None
     
-    text = df['text'].values.tolist()
+    text = df['cleaned_text'].values.tolist()
     labels = df['target'].values.tolist()
 
     text_encodings = tokenizer(text, padding=True, truncation=True) #tokenize text
@@ -40,7 +41,7 @@ def get_dataset(data_path, model_path):
 
 # Get DataLoader
 def get_dataloader(dataset, batch_size):
-    return torch.utils.data.dataloader(
+    return DataLoader(
         dataset,
         batch_size = batch_size,
         shuffle = True
