@@ -27,6 +27,7 @@ def get_dataset(data_path, model_path):
     # Load Data
     if data_path:
         df = pd.read_csv(data_path)
+        df.dropna(subset=['cleaned_text', 'target'], inplace=True)
     else:
         df = None
     

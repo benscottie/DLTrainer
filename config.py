@@ -1,23 +1,21 @@
 import os
 from yacs.config import CfgNode as CN
 
-DATA_DIR = 'Data'
-MAIN_DIR = 'DLTrainer'
+DATA_DIR = '/data/dl'
 
 _C = CN()
 _C.EXP_NM = 'test'
-_C.EXP_DIR = 'experiments'
+_C.EXP_DIR = 'dl_trainer'
 
 # training params
 _C.TRAIN = CN()
 _C.TRAIN.NUM_EPOCHS = 5
-#_C.TRAIN_STEPS = 10000
 _C.TRAIN.GRAD_ACCUM_STEPS = 1
-_C.TRAIN.EVAL_STEPS = 50
+_C.TRAIN.EVAL_STEPS = 1000
 _C.TRAIN.CP_DIR = 'checkpoints'
 _C.TRAIN.DEVICE = 'gpu'
 _C.TRAIN.SAVE_CP = True
-_C.TRAIN.EVAL_ONLY = True
+_C.TRAIN.EVAL_ONLY = False
 
 # model params
 _C.TRAIN.MODEL = CN()
@@ -25,13 +23,13 @@ _C.TRAIN.MODEL.MODEL_PATH = 'bert-base-uncased'
 
 # optimizer params
 _C.TRAIN.OPTIMIZER = CN()
-_C.TRAIN.OPTIMIZER.LR = 0.001
+_C.TRAIN.OPTIMIZER.LR = 3e-5
 
 # learning rate scheduler params
 _C.TRAIN.LR_SCHEDULER = CN()
 _C.TRAIN.LR_SCHEDULER.NAME = 'constant'
 # scheduler types: ['linear', 'cosine', 'cosine_with_restarts', 'polynomial', 'constant', 'constant_with_warmup']
-_C.TRAIN.LR_SCHEDULER.WARMUP_STEPS = 0
+_C.TRAIN.LR_SCHEDULER.WARMUP_RATIO = 0.10
 
 # dataloader params
 _C.DATALOADER = CN()
